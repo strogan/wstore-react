@@ -61,7 +61,7 @@ const data = {
       description: "high quality product",
     },
     {
-      _id: "5",
+      _id: "6",
       name: "Addidas Fit pants",
       category: "Pants",
       image: "/images/p6.jpg",
