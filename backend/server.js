@@ -19,6 +19,11 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/wstoredb", {
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
+app.get("/api/config/paypal", (req, res) => {
+  res.send(
+    "AV8i2O7R31qMOdnPMbZrT5VvckubpYvsDoHzrtT4FO7zhq1yj03O_M7HQCHTv0HqWTYnX8xpp60roabP"
+  );
+});
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
