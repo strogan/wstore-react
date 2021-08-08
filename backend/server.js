@@ -25,12 +25,17 @@ app.get("/api/config/paypal", (req, res) => {
     "AV8i2O7R31qMOdnPMbZrT5VvckubpYvsDoHzrtT4FO7zhq1yj03O_M7HQCHTv0HqWTYnX8xpp60roabP"
   );
 });
-app.get("/", (req, res) => {
-  res.send("Server is ready");
-});
+//app.get("/", (req, res) => {
+//  res.send("Server is ready");
+//});
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
