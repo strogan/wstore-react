@@ -34,6 +34,9 @@
     "url": "https://github.com/strogan/wstore-react/issues"
   },
   "homepage": "https://github.com/strogan/wstore-react#readme",
-  "engines": {"node":"16.2.2", "npm": "7.13.0"}
+  "engines": {
+    "node":"6.11.1", 
+    "npm": "7.13.0"
+  }
 
 }
