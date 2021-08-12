@@ -7,6 +7,7 @@ export const generateToken = (user) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSeller: user.isSeller,
     },
     process.env.JWT_SECRET || "somethingsecret",
     { expiresIn: "30d" }
@@ -38,5 +39,21 @@ export const isAdmin = (req, res, next) => {
     next();
   } else {
     res.status(401).send({ message: "Invalid admin token" });
+  }
+};
+
+export const isSeller = (req, res, next) => {
+  if (req.user && req.user.isSeller) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid seller token" });
+  }
+};
+
+export const isSellerOrAdmin = (req, res, next) => {
+  if (req.user && (req.user.isSeller || req.user.isAdmin)) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid admin/seller token" });
   }
 };
