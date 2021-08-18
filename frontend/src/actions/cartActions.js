@@ -1,12 +1,23 @@
 import axios from "axios";
 import {
   CART_ADD_ITEM,
+  //CART_ADD_ITEM_FAIL,
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../constants/cartConstant";
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${productId}`);
+
+  /*const {
+    cart: { cartItems },
+  } = getState();
+  if (cartItems.length > 0 /*&& data.seller._id !== cartItems[0].seller) {
+    dispatch({
+      type: CART_ADD_ITEM_FAIL,
+      payload: "Cant add to car. Buy from 1 seller",
+    });
+  }*/
   dispatch({
     type: CART_ADD_ITEM,
     payload: {
