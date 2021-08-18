@@ -22,20 +22,30 @@ import UserEditScreen from "./screens/UserEditScreen";
 import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screens/SellerScreen";
 import SearchBox from "./components/SearchBox";
-
+import MessageBox from "./components/MessageBox";
+import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
 import { useEffect } from "react";
 import { listProductCategories } from "./actions/productActions";
+import { useState } from "react";
 
 function App() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
   };
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const {
+    loading: loadingCategory,
+    error: errorCategory,
+    categories,
+  } = productCategoryList;
+
   useEffect(() => {
     dispatch(listProductCategories());
   }, [dispatch]);
@@ -44,6 +54,13 @@ function App() {
       <div className="grid-container">
         <header className="row">
           <div>
+            <button
+              type="button"
+              className="open-sidebar"
+              onClick={() => setSidebarIsOpen(true)}
+            >
+              <i className="fa fa-bars"></i>
+            </button>
             <Link className="brand" to="/">
               WStore
             </Link>
@@ -121,7 +138,36 @@ function App() {
             )}
           </div>
         </header>
-
+        <aside className={sidebarIsOpen ? "open" : ""}>
+          <ul className="categories">
+            <li>
+              <strong>Categories:</strong>
+              <button
+                onClick={() => setSidebarIsOpen(false)}
+                className="close-sidebar"
+                type="button"
+              >
+                <i className="fa fa-close"></i>
+              </button>
+            </li>
+            {loadingCategory ? (
+              <LoadingBox />
+            ) : errorCategory ? (
+              <MessageBox varint="danger">{errorCategory}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    to={`/search/category/${c}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
+        </aside>
         <main>
           <Route path="/seller/:id" component={SellerScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
