@@ -27,7 +27,9 @@ app.get("/api/config/paypal", (req, res) => {
 });
 
 app.get("/api/config/google", (req, res) => {
-  res.send(process.env.GOOGLE_API_KEY || "");
+  res.send(
+    process.env.GOOGLE_API_KEY || "AIzaSyAOPDBO_suJNjS2-SGkuQgoYLyk41M5ROU"
+  );
 });
 
 //app.get("/", (req, res) => {
