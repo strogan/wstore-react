@@ -28,6 +28,7 @@ import SearchScreen from "./screens/SearchScreen";
 import { useEffect } from "react";
 import { listProductCategories } from "./actions/productActions";
 import { useState } from "react";
+import MapScreen from "./screens/MapScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -197,6 +198,7 @@ function App() {
             exact
           />
           <PrivateRoute path="/profile" component={ProfileScreen} />
+          <PrivateRoute path="/map" component={MapScreen} />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />

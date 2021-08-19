@@ -25,6 +25,11 @@ app.get("/api/config/paypal", (req, res) => {
     "AV8i2O7R31qMOdnPMbZrT5VvckubpYvsDoHzrtT4FO7zhq1yj03O_M7HQCHTv0HqWTYnX8xpp60roabP"
   );
 });
+
+app.get("/api/config/google", (req, res) => {
+  res.send(process.env.GOOGLE_API_KEY || "");
+});
+
 //app.get("/", (req, res) => {
 //  res.send("Server is ready");
 //});
