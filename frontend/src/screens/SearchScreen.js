@@ -17,7 +17,7 @@ export default function SearchScreen(props) {
     min = 0,
     max = 0,
     rating = 0,
-    order = "",
+    order = "newest",
   } = props.match.params;
 
   const dispatch = useDispatch();
